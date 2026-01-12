@@ -123,51 +123,51 @@ void *hack_thread(void *) {
     
     // public class MovingTrain : SubwayEntity --> private void Displace() { }
 hexPatches.Displace = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                        string2Offset(OBFUSCATE("0xB05480")),
+                                                        string2Offset(OBFUSCATE("0x15E66F8")),
                                                         OBFUSCATE("79 04 44 E3 1E FF 2F E1"));
 
 // Namespace: SYBO.Subway --> public class RunSessionData --> public void AddCoins(int coins) { }
 hexPatches.AddCoins = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                        string2Offset(OBFUSCATE("0x972218")),
+                                                        string2Offset(OBFUSCATE("0xFA3A90")),
                                                         OBFUSCATE("A0 00 44 E3 1E FF 2E E1"));
 
 // Namespace: SYBO.Subway --> public class RunSessionData --> public void AddKeys(int keys) { }
 hexPatches.AddKeys = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                       string2Offset(OBFUSCATE("0x9722C8")),
+                                                       string2Offset(OBFUSCATE("0xFA3AD0")),
                                                        OBFUSCATE("02 01 E0 E3 1E FF 2F E1"));
 
 // Namespace: SYBO.Subway --> public class RunSessionData --> public void AddPoints(double points) { }
 hexPatches.AddPoints = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                         string2Offset(OBFUSCATE("0x972638")),
+                                                         string2Offset(OBFUSCATE("0xFA3EC4")),
                                                          OBFUSCATE("0A 00 A0 E3 1E FF 2F E1"));                                                
 
 // Namespace: SYBO.Subway --> public class ScoreMultiplierManager --> public int get_BaseMultiplierSum() { }
 hexPatches.Get_BaseMultiplierSum = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                                     string2Offset(OBFUSCATE("0xB3D8C4")),
+                                                                     string2Offset(OBFUSCATE("0x15BAAD4")),
                                                                      OBFUSCATE("01 00 A0 E3 1E FF 2F E1"));                        
 
 
 // Namespace: SYBO.Subway --> public class ScoreMultiplierManager --> private void AddItemSources() { }
 hexPatches.AddItemSources = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                              string2Offset(OBFUSCATE("0xB3E19C")),
+                                                              string2Offset(OBFUSCATE("0x15BB968")),
                                                               OBFUSCATE("01 00 A0 E3 1E FF 2F E1"));                        
 
 
-// Namespace: SYBO.Subway --> public class CharacterInfo : MonoBehaviour --> private void Motor_OnLowerImpact(CollisionEventData eventData) { }
+// Namespace: SYBO.Subway --> public class CharacterInfo : MonoBehaviour --> private void Motor_OnLowerImpact(CollisionEventData eventData) { } --> private void Motor_OnImpact(CollisionEventData eventData) { }
 hexPatches.Motor_OnLowerImpact = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                                   string2Offset(OBFUSCATE("0xBCAB80")),
+                                                                   string2Offset(OBFUSCATE("0xF4DE00")),
                                                                    OBFUSCATE("01 00 A0 E3 1E FF 2F E1"));                        
 
 
 // Namespace: SYBO.Subway --> public class CharacterInfo : MonoBehaviour --> public CharacterStumble get_Stumble() { }
 hexPatches.Get_Stumble = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                           string2Offset(OBFUSCATE("0xBC96D4")),
+                                                           string2Offset(OBFUSCATE("0xF4C83C")),
                                                            OBFUSCATE("01 00 A0 E3 1E FF 2F E1"));                        
 
 
-// Namespace: SYBO.Subway --> public class CharacterInfo : MonoBehaviour --> private void Motor_OnLaneChangeFrontalImpact(CollisionEventData eventData) { }
+// Namespace: SYBO.Subway --> public class CharacterInfo : MonoBehaviour --> private void Motor_OnLaneChangeFrontalImpact(CollisionEventData eventData) { } --> private void Motor_OnFrontalImpact(CollisionEventData eventData) { }
 hexPatches.Motor_OnLaneChangeFrontalImpac = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                                              string2Offset(OBFUSCATE("0xBCAE3C")),
+                                                                              string2Offset(OBFUSCATE("0xF4DE50")),
                                                                               OBFUSCATE("C8 02 44 E3 1E FF 2F E1"));                        
 
 
@@ -179,61 +179,61 @@ hexPatches.Motor_OnSideImpact = MemoryPatch::createWithHex(targetLibName, //Norm
 
 // Namespace: SYBO.Subway --> public class CharacterInfo : MonoBehaviour --> private void Motor_OnFrontalImpact(CollisionEventData eventData) { }
 hexPatches.Motor_OnFrontalImpact = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                    string2Offset(OBFUSCATE("0xBCAF2C")),
+                                                    string2Offset(OBFUSCATE("0xF4DE50")),
                                                     OBFUSCATE("01 00 A0 E3 1E FF 2F E1"));                        
 
 
 // Namespace: SYBO.Subway --> public class CharacterStumble : MonoBehaviour --> public void Kill(DeathCause cause) { }
 hexPatches.Kill = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                    string2Offset(OBFUSCATE("0xBCB00C")),
+                                                    string2Offset(OBFUSCATE("0xF66A04")),
                                                     OBFUSCATE("00 00 A0 E3 1E FF 2F E1"));                
 
 
 // Namespace: SYBO.RunnerCore.Character --> public class CharacterMotorAbilities : MonoBehaviour --> public void ProcessAbilities(CharacterMotorConfig config) { }
 hexPatches.ProcessAbilities = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                    string2Offset(OBFUSCATE("0xBCD600")),
+                                                    string2Offset(OBFUSCATE("0xF3C8B0")),
                                                     OBFUSCATE("00 00 40 E3 1E FF 2F E1"));                        
 
 
 // Namespace: SYBO.RunnerCore.BuildingBlocks --> public class ChunkBuilder // TypeDefIndex: --> public void WorldReposition(float amount) { }
 hexPatches.WorldReposition = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                       string2Offset(OBFUSCATE("0xA4E7D0")),
+                                                       string2Offset(OBFUSCATE("0x1066D78")),
                                                        OBFUSCATE("FA 04 44 E3 1E FF 2F E1"));                
 
 
 // public class JumpAbility : CharacterAbilityBlueprint --> public ToggleFloat get_JumpHeight() { }
 hexPatches.Get_JumpHeight = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                       string2Offset(OBFUSCATE("0x8AD938")),
+                                                       string2Offset(OBFUSCATE("0xF36DA8")),
                                                        OBFUSCATE("00 7A F7 EE 90 1A 17 EE"));        
 
 
 // public class JumpAbility : CharacterAbilityBlueprint --> public ToggleFloat get_AirJumpHeight() { }
 hexPatches.Get_AirJumpHeight = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                       string2Offset(OBFUSCATE("0x8AD948")),
+                                                       string2Offset(OBFUSCATE("0xF36DB8")),
                                                        OBFUSCATE("01 00 A0 E3 1E FF 2F E1"));                
 
 
 // public class LaneChangeAbility : CharacterAbilityBlueprint --> public ToggleFloat get_LaneChangeDuration() { }
 hexPatches.Get_LaneChangeDuration = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                             string2Offset(OBFUSCATE("0x8BC158")),
+                                                             string2Offset(OBFUSCATE("0xF371DC")),
                                                              OBFUSCATE("00 00 A0 E3 1E FF 2F E1"));                
 
 
 // Namespace: SYBO.RunnerCore.Character --> public class CharacterMotor : MonoBehaviour --> public SurfaceKind GetSurfaceKind() { }
 hexPatches.GetSurfaceKind = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                        string2Offset(OBFUSCATE("0xBCF754")),
+                                                        string2Offset(OBFUSCATE("0xF3FAE4")),
                                                         OBFUSCATE("01 00 A0 E3 1E FF 2F E1"));                
 
 
 // Namespace: SYBO.RunnerCore.Character --> public class CharacterMotorAbilities : MonoBehaviour --> public float get_Gravity() { }
 hexPatches.Get_Gravity = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                         string2Offset(OBFUSCATE("0xBCFAD4")),
+                                                         string2Offset(OBFUSCATE("0xF42B50")),
                                                          OBFUSCATE("00 00 E0 E3 1E FF 2F E1"));                
 
 
 // Namespace: SYBO.RunnerCore.Character --> public class CharacterMotorAbilities : MonoBehaviour --> public int get_JumpLimit() { }
 hexPatches.Get_JumpLimit = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                     string2Offset(OBFUSCATE("0xBCFEA4")),
+                                                     string2Offset(OBFUSCATE("0xF3EA38")),
                                                      OBFUSCATE("00 00 E0 E3 1E FF 2F E1"));                
 
 
@@ -245,37 +245,37 @@ hexPatches.ForceCustomJump = MemoryPatch::createWithHex(targetLibName, //Normal 
 
 // Namespace: SYBO.RunnerCore.Character --> public class CharacterMotor : MonoBehaviour --> public void StickToGround() { }
 hexPatches.StickToGround = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                     string2Offset(OBFUSCATE("0xBD1A5C")),
+                                                     string2Offset(OBFUSCATE("0xF40850")),
                                                      OBFUSCATE("00 00 E0 E3 1E FF 2F E1"));                              
 
 
 // Namespace: SYBO.RunnerCore.Character --> public class CharacterMotor : MonoBehaviour --> public void ApplyGravity() { }
 hexPatches.ApplyGravity = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                        string2Offset(OBFUSCATE("0xBD2118")),
+                                                        string2Offset(OBFUSCATE("0xF41064")),
                                                         OBFUSCATE("00 00 E0 E3 1E FF 2F E1"));                                   
 
 
 // Namespace: SYBO.RunnerCore.Character --> public class CharacterMotorAbilities : MonoBehaviour --> public bool get_NoCornerCollision() { }
 hexPatches.Get_NoCornerCollision = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                         string2Offset(OBFUSCATE("0xBD2708")),
+                                                         string2Offset(OBFUSCATE("0xF4163C")),
                                                          OBFUSCATE("00 00 E0 E3 1E FF 2F E1"));                              
 
 
 // Namespace: SYBO.RunnerCore.Character --> public class CharacterMotorAbilities : MonoBehaviour --> public float get_MinSpeedAbilities() { }
 hexPatches.Get_MinSpeedAbilities = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                       string2Offset(OBFUSCATE("0xBD2F7C")),
+                                                       string2Offset(OBFUSCATE("0xF427B0")),
                                                        OBFUSCATE("FA 04 44 E3 1E FF 2F E1"));        
 
 
 // Namespace: SYBO.RunnerCore.Character --> public class CharacterMotorAbilities : MonoBehaviour --> public float get_MaxSpeed() { }
 hexPatches.Get_MaxSpeed = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                      string2Offset(OBFUSCATE("0xBD316C")),
+                                                      string2Offset(OBFUSCATE("0xF42B30")),
                                                       OBFUSCATE("00 00 E0 E3 1E FF 2F E1"));                                                        
 
 
 // Namespace: SYBO.RunnerCore.Character --> public class CharacterMotorAbilities : MonoBehaviour --> public float get_MaxSpeedAbilities() { }
 hexPatches.Get_MaxSpeedAbilities = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
-                                                   string2Offset(OBFUSCATE("0xBD31AC")),
+                                                   string2Offset(OBFUSCATE("0xF42970")),
                                                    OBFUSCATE("00 F0 20 E3 00 F0 20 E3"));                
 
 
