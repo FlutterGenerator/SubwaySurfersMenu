@@ -304,7 +304,7 @@ Java_uk_lgl_modmenu_FloatingModMenuService_getFeatureList(JNIEnv *env, jobject c
 
     const char *features[] = {
             //Create new collapse
-                        OBFUSCATE("Category_〘SUBWAY SURF〙〘3.13.2〙"), //Not counted
+                        OBFUSCATE("Category_〘SUBWAY SURF〙〘3.57.0〙"), //Not counted
             OBFUSCATE("Toggle_Displace️"),//1 Case
             OBFUSCATE("Toggle_AddCoins"),//2 Case
             OBFUSCATE("Toggle_AddKeys"),//3 Case
