@@ -26,7 +26,7 @@ struct My_Patches {
     // let's assume we have patches for these functions for whatever game
     // like show in miniMap boolean function
     MemoryPatch Displace,AddCoins,AddKeys,AddPoints,Get_BaseMultiplierSum,AddItemSources,Motor_OnLowerImpact,Get_Stumble,Motor_OnLaneChangeFrontalImpac,Motor_OnSideImpact,Motor_OnFrontalImpact,Kill,ProcessAbilities,WorldReposition,Get_JumpHeight,Get_AirJumpHeight,Get_LaneChangeDuration,GetSurfaceKind,Get_Gravity,Get_JumpLimit,ForceCustomJump,StickToGround,ApplyGravity,Get_NoCornerCollision,Get_MinSpeedAbilities,Get_MaxSpeed,Get_MaxSpeedAbilities;
-	// etc...
+        // etc...
 } hexPatches;
 
 bool feature2 = false, featureHookToggle = false, chams, shading, wireframe, glow, outline, rainbow = false;
@@ -96,7 +96,7 @@ void *hack_thread(void *) {
     setShader("_MainTex");
     LogShaders();
     Wallhack();
-    
+
     //Check if target lib is loaded
     do {
         sleep(1);
@@ -113,127 +113,172 @@ void *hack_thread(void *) {
 #if defined(__aarch64__) //Compile for arm64 lib only
 
 // A64HookFunction((void *)getAbsoluteAddress("libil2cpp.so", Hook), (void *)mod, (void **) &old_mod);
-    
+
 #endif //Compile for armv7 lib only. Do not worry about greyed out highlighting code, it still works
 
     // New way to patch hex via KittyMemory without need to specify len. Spaces or without spaces are fine
     // ARMv7 assembly example
     // MOV R0, #0x0 = 00 00 A0 E3
     // BX LR = 1E FF 2F E1
+    
+    // public class MovingTrain : SubwayEntity --> private void Displace() { }
 hexPatches.Displace = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                         string2Offset(OBFUSCATE("0xB05480")),
                                                         OBFUSCATE("79 04 44 E3 1E FF 2F E1"));
-                                                    
-                                                    
+
+// Namespace: SYBO.Subway --> public class RunSessionData --> public void AddCoins(int coins) { }
 hexPatches.AddCoins = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                         string2Offset(OBFUSCATE("0x972218")),
                                                         OBFUSCATE("A0 00 44 E3 1E FF 2E E1"));
-                                                    
-                                                    
+
+// Namespace: SYBO.Subway --> public class RunSessionData --> public void AddKeys(int keys) { }
 hexPatches.AddKeys = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                        string2Offset(OBFUSCATE("0x9722C8")),
                                                        OBFUSCATE("02 01 E0 E3 1E FF 2F E1"));
-                                                    
+
+// Namespace: SYBO.Subway --> public class RunSessionData --> public void AddPoints(double points) { }
 hexPatches.AddPoints = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                          string2Offset(OBFUSCATE("0x972638")),
-                                                         OBFUSCATE("0A 00 A0 E3 1E FF 2F E1"));						
-                                                   
-    
+                                                         OBFUSCATE("0A 00 A0 E3 1E FF 2F E1"));                                                
+
+// Namespace: SYBO.Subway --> public class ScoreMultiplierManager --> public int get_BaseMultiplierSum() { }
 hexPatches.Get_BaseMultiplierSum = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                                      string2Offset(OBFUSCATE("0xB3D8C4")),
-                                                                     OBFUSCATE("01 00 A0 E3 1E FF 2F E1"));			
-                                                    
-                                                    
+                                                                     OBFUSCATE("01 00 A0 E3 1E FF 2F E1"));                        
+
+
+// Namespace: SYBO.Subway --> public class ScoreMultiplierManager --> private void AddItemSources() { }
 hexPatches.AddItemSources = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                               string2Offset(OBFUSCATE("0xB3E19C")),
-                                                              OBFUSCATE("01 00 A0 E3 1E FF 2F E1"));			
+                                                              OBFUSCATE("01 00 A0 E3 1E FF 2F E1"));                        
 
 
+// Namespace: SYBO.Subway --> public class CharacterInfo : MonoBehaviour --> private void Motor_OnLowerImpact(CollisionEventData eventData) { }
 hexPatches.Motor_OnLowerImpact = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                                    string2Offset(OBFUSCATE("0xBCAB80")),
-                                                                   OBFUSCATE("01 00 A0 E3 1E FF 2F E1"));			
-                                                                   
+                                                                   OBFUSCATE("01 00 A0 E3 1E FF 2F E1"));                        
+
+
+// Namespace: SYBO.Subway --> public class CharacterInfo : MonoBehaviour --> public CharacterStumble get_Stumble() { }
 hexPatches.Get_Stumble = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                            string2Offset(OBFUSCATE("0xBC96D4")),
-                                                           OBFUSCATE("01 00 A0 E3 1E FF 2F E1"));			
-                                                                                           
+                                                           OBFUSCATE("01 00 A0 E3 1E FF 2F E1"));                        
+
+
+// Namespace: SYBO.Subway --> public class CharacterInfo : MonoBehaviour --> private void Motor_OnLaneChangeFrontalImpact(CollisionEventData eventData) { }
 hexPatches.Motor_OnLaneChangeFrontalImpac = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                                               string2Offset(OBFUSCATE("0xBCAE3C")),
-                                                                              OBFUSCATE("C8 02 44 E3 1E FF 2F E1"));			
-                                                                                                          
+                                                                              OBFUSCATE("C8 02 44 E3 1E FF 2F E1"));                        
+
+
+// Namespace: SYBO.Subway --> public class CharacterInfo : MonoBehaviour --> private void Motor_OnSideImpact(CollisionEventData eventData) { }
 hexPatches.Motor_OnSideImpact = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                                   string2Offset(OBFUSCATE("0xBCAEB4")),
-                                                                  OBFUSCATE("0F 07 02 E3 1E FF 2F E1"));		
-   
+                                                                  OBFUSCATE("0F 07 02 E3 1E FF 2F E1"));                
+
+
+// Namespace: SYBO.Subway --> public class CharacterInfo : MonoBehaviour --> private void Motor_OnFrontalImpact(CollisionEventData eventData) { }
 hexPatches.Motor_OnFrontalImpact = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                     string2Offset(OBFUSCATE("0xBCAF2C")),
-                                                    OBFUSCATE("01 00 A0 E3 1E FF 2F E1"));			
-                                                                                                          
+                                                    OBFUSCATE("01 00 A0 E3 1E FF 2F E1"));                        
+
+
+// Namespace: SYBO.Subway --> public class CharacterStumble : MonoBehaviour --> public void Kill(DeathCause cause) { }
 hexPatches.Kill = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                     string2Offset(OBFUSCATE("0xBCB00C")),
-                                                    OBFUSCATE("00 00 A0 E3 1E FF 2F E1"));		
-   
+                                                    OBFUSCATE("00 00 A0 E3 1E FF 2F E1"));                
+
+
+// Namespace: SYBO.RunnerCore.Character --> public class CharacterMotorAbilities : MonoBehaviour --> public void ProcessAbilities(CharacterMotorConfig config) { }
 hexPatches.ProcessAbilities = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                     string2Offset(OBFUSCATE("0xBCD600")),
-                                                    OBFUSCATE("00 00 40 E3 1E FF 2F E1"));			
-                                                                                                          
+                                                    OBFUSCATE("00 00 40 E3 1E FF 2F E1"));                        
+
+
+// Namespace: SYBO.RunnerCore.BuildingBlocks --> public class ChunkBuilder // TypeDefIndex: --> public void WorldReposition(float amount) { }
 hexPatches.WorldReposition = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                        string2Offset(OBFUSCATE("0xA4E7D0")),
-                                                       OBFUSCATE("FA 04 44 E3 1E FF 2F E1"));		
-													   
+                                                       OBFUSCATE("FA 04 44 E3 1E FF 2F E1"));                
+
+
+// public class JumpAbility : CharacterAbilityBlueprint --> public ToggleFloat get_JumpHeight() { }
 hexPatches.Get_JumpHeight = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                        string2Offset(OBFUSCATE("0x8AD938")),
-                                                       OBFUSCATE("00 7A F7 EE 90 1A 17 EE"));	
-													
+                                                       OBFUSCATE("00 7A F7 EE 90 1A 17 EE"));        
+
+
+// public class JumpAbility : CharacterAbilityBlueprint --> public ToggleFloat get_AirJumpHeight() { }
 hexPatches.Get_AirJumpHeight = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                        string2Offset(OBFUSCATE("0x8AD948")),
-                                                       OBFUSCATE("01 00 A0 E3 1E FF 2F E1"));		
-													
+                                                       OBFUSCATE("01 00 A0 E3 1E FF 2F E1"));                
+
+
+// public class LaneChangeAbility : CharacterAbilityBlueprint --> public ToggleFloat get_LaneChangeDuration() { }
 hexPatches.Get_LaneChangeDuration = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                              string2Offset(OBFUSCATE("0x8BC158")),
-                                                             OBFUSCATE("00 00 A0 E3 1E FF 2F E1"));		
-													
+                                                             OBFUSCATE("00 00 A0 E3 1E FF 2F E1"));                
+
+
+// Namespace: SYBO.RunnerCore.Character --> public class CharacterMotor : MonoBehaviour --> public SurfaceKind GetSurfaceKind() { }
 hexPatches.GetSurfaceKind = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                         string2Offset(OBFUSCATE("0xBCF754")),
-                                                        OBFUSCATE("01 00 A0 E3 1E FF 2F E1"));		
-													
+                                                        OBFUSCATE("01 00 A0 E3 1E FF 2F E1"));                
+
+
+// Namespace: SYBO.RunnerCore.Character --> public class CharacterMotorAbilities : MonoBehaviour --> public float get_Gravity() { }
 hexPatches.Get_Gravity = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                          string2Offset(OBFUSCATE("0xBCFAD4")),
-                                                         OBFUSCATE("00 00 E0 E3 1E FF 2F E1"));		
-													
+                                                         OBFUSCATE("00 00 E0 E3 1E FF 2F E1"));                
+
+
+// Namespace: SYBO.RunnerCore.Character --> public class CharacterMotorAbilities : MonoBehaviour --> public int get_JumpLimit() { }
 hexPatches.Get_JumpLimit = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                      string2Offset(OBFUSCATE("0xBCFEA4")),
-                                                     OBFUSCATE("00 00 E0 E3 1E FF 2F E1"));		
-                                                    
+                                                     OBFUSCATE("00 00 E0 E3 1E FF 2F E1"));                
+
+
+// Namespace: SYBO.RunnerCore.Character --> public class CharacterMotor : MonoBehaviour --> public void ForceCustomJump(float height, AnimationCurve curve, bool incrementJumpCounter = True) { }
 hexPatches.ForceCustomJump = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                       string2Offset(OBFUSCATE("0xBCE664")),
-                                                      OBFUSCATE("00 00 A0 E3 1E FF 2F E1"));		
-													
+                                                      OBFUSCATE("00 00 A0 E3 1E FF 2F E1"));                
+
+
+// Namespace: SYBO.RunnerCore.Character --> public class CharacterMotor : MonoBehaviour --> public void StickToGround() { }
 hexPatches.StickToGround = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                      string2Offset(OBFUSCATE("0xBD1A5C")),
-                                                     OBFUSCATE("00 00 E0 E3 1E FF 2F E1"));		      	
-													
+                                                     OBFUSCATE("00 00 E0 E3 1E FF 2F E1"));                              
+
+
+// Namespace: SYBO.RunnerCore.Character --> public class CharacterMotor : MonoBehaviour --> public void ApplyGravity() { }
 hexPatches.ApplyGravity = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                         string2Offset(OBFUSCATE("0xBD2118")),
-                                                        OBFUSCATE("00 00 E0 E3 1E FF 2F E1"));		      	     
-													
+                                                        OBFUSCATE("00 00 E0 E3 1E FF 2F E1"));                                   
+
+
+// Namespace: SYBO.RunnerCore.Character --> public class CharacterMotorAbilities : MonoBehaviour --> public bool get_NoCornerCollision() { }
 hexPatches.Get_NoCornerCollision = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                          string2Offset(OBFUSCATE("0xBD2708")),
-                                                         OBFUSCATE("00 00 E0 E3 1E FF 2F E1"));		      	
-													
+                                                         OBFUSCATE("00 00 E0 E3 1E FF 2F E1"));                              
+
+
+// Namespace: SYBO.RunnerCore.Character --> public class CharacterMotorAbilities : MonoBehaviour --> public float get_MinSpeedAbilities() { }
 hexPatches.Get_MinSpeedAbilities = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                        string2Offset(OBFUSCATE("0xBD2F7C")),
-                                                       OBFUSCATE("FA 04 44 E3 1E FF 2F E1"));	
-													
+                                                       OBFUSCATE("FA 04 44 E3 1E FF 2F E1"));        
+
+
+// Namespace: SYBO.RunnerCore.Character --> public class CharacterMotorAbilities : MonoBehaviour --> public float get_MaxSpeed() { }
 hexPatches.Get_MaxSpeed = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                       string2Offset(OBFUSCATE("0xBD316C")),
-                                                      OBFUSCATE("00 00 E0 E3 1E FF 2F E1"));	                                                
-                                                    	             	             
+                                                      OBFUSCATE("00 00 E0 E3 1E FF 2F E1"));                                                        
+
+
+// Namespace: SYBO.RunnerCore.Character --> public class CharacterMotorAbilities : MonoBehaviour --> public float get_MaxSpeedAbilities() { }
 hexPatches.Get_MaxSpeedAbilities = MemoryPatch::createWithHex(targetLibName, //Normal obfuscate
                                                    string2Offset(OBFUSCATE("0xBD31AC")),
-                                                   OBFUSCATE("00 F0 20 E3 00 F0 20 E3"));		
-													
-							
+                                                   OBFUSCATE("00 F0 20 E3 00 F0 20 E3"));                
+
+
     LOGI(OBFUSCATE("Done"));
 
     return NULL;
@@ -259,11 +304,11 @@ Java_uk_lgl_modmenu_FloatingModMenuService_getFeatureList(JNIEnv *env, jobject c
 
     const char *features[] = {
             //Create new collapse
-			OBFUSCATE("Category_〘SUBWAY SURF〙〘3.13.2〙"), //Not counted
+                        OBFUSCATE("Category_〘SUBWAY SURF〙〘3.13.2〙"), //Not counted
             OBFUSCATE("Toggle_Displace️"),//1 Case
             OBFUSCATE("Toggle_AddCoins"),//2 Case
             OBFUSCATE("Toggle_AddKeys"),//3 Case
-			OBFUSCATE("Toggle_MotorOnFrontalImpact️"),//11 Case
+                        OBFUSCATE("Toggle_MotorOnFrontalImpact️"),//11 Case
             OBFUSCATE("Toggle_Kill"),//12 Case
             OBFUSCATE("Toggle_ProcessAbilities"),//13 Case
 //Create new collapse
@@ -282,7 +327,7 @@ Java_uk_lgl_modmenu_FloatingModMenuService_getFeatureList(JNIEnv *env, jobject c
             OBFUSCATE("Toggle_LaneChangeDuration"),//17 Case
             OBFUSCATE("Toggle_SurfaceKind"),//18 Case
             OBFUSCATE("Toggle_Gravity"),//19 Case
-			OBFUSCATE("Collapse_〘JAMP〙〘GRAVITY〙〘SPEED〙"),//Not counted
+                        OBFUSCATE("Collapse_〘JAMP〙〘GRAVITY〙〘SPEED〙"),//Not counted
             OBFUSCATE("CollapseAdd_Toggle_JumpLimit️"),//20 Case
             OBFUSCATE("CollapseAdd_Toggle_ForceCustomJump️"),//21 Case
             OBFUSCATE("CollapseAdd_Toggle_StickToGround"),//22 Case
@@ -299,7 +344,7 @@ Java_uk_lgl_modmenu_FloatingModMenuService_getFeatureList(JNIEnv *env, jobject c
             OBFUSCATE("ButtonOnOff_Rainbow Chams"), //32 Case
             OBFUSCATE("Category_〘FOR MORE〙"), //Not counted
             OBFUSCATE("ButtonLink_VISIT MY BLOGSPOT_https://elementman50.blogspot.com"), //Not counted       
-            
+
             OBFUSCATE("RichWebView_<html><head><style>body{color: white;}</style></head><body>"
                       "<marquee style=\"color: red; font-weight:bold;\" direction=\"left\" scrollamount=\"5\" behavior=\"scroll\">This is Mod is made by <u>亗𝐑𝐀𝐏𝐈𝐍𝐑𝐎亗</u> VISIT OUR WEB FOR MORE UPDATES</marquee>"
                       "</body></html>")
