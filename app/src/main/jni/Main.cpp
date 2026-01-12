@@ -13,42 +13,42 @@
 #include "KittyMemory/MemoryPatch.h"
 //#include "And64InlineHook/And64InlineHook.hpp"
 #include "Includes/Chams.h"
-#include "Menu.h"
+#include  "Menu.h"
 
 //#include <Substrate/SubstrateHook.h>
 //#include <Substrate/CydiaSubstrate.h>
 
-//Target lib here
+//Целевая библиотека здесь
 #define targetLibName OBFUSCATE("libil2cpp.so")
 
-// fancy struct for patches for kittyMemory
-struct My_Patches {
-    // let's assume we have patches for these functions for whatever game
-    // like show in miniMap boolean function
-    MemoryPatch Displace,AddCoins,AddKeys,AddPoints,Get_BaseMultiplierSum,AddItemSources,Motor_OnLowerImpact,Get_Stumble,Motor_OnLaneChangeFrontalImpac,Motor_OnSideImpact,Motor_OnFrontalImpact,Kill,ProcessAbilities,WorldReposition,Get_JumpHeight,Get_AirJumpHeight,Get_LaneChangeDuration,GetSurfaceKind,Get_Gravity,Get_JumpLimit,ForceCustomJump,StickToGround,ApplyGravity,Get_NoCornerCollision,Get_MinSpeedAbilities,Get_MaxSpeed,Get_MaxSpeedAbilities;
-	// etc...
+// Усовершенствованная структура для патчей для kittyMemory
+структура  My_Patches  {
+    // Предположим, у нас есть патчи для этих функций для какой-либо игры
+    // как показано в булевой функции miniMap
+    MemoryPatch  Displace , AddCoins , AddKeys , AddPoints , Get_BaseMultiplierSum , AddItemSources , Motor_OnLowerImpact , Get_Stumble , Motor_OnLaneChangeFrontalImpac , Motor_OnSideImpact , Motor_OnFrontalImpact , Kill , ProcessAbilities , WorldReposition , Get_JumpHeight , Get_AirJumpHeight , Get_LaneChangeDuration , GetSurfaceKind , Get_Gravity , Get_JumpLimit , ForceCustomJump , StickToGround , ApplyGravity , Get_NoCornerCollision , Get_MinSpeedAbilities , Get_MaxSpeed , Get_MaxSpeedAbilities ;
+	// и т. д...
 } hexPatches;
 
-bool feature2 = false, featureHookToggle = false, chams, shading, wireframe, glow, outline, rainbow = false;
-int sliderValue = 1, level = 0;
-void *instanceBtn;
+bool feature2 = false , featureHookToggle = false , chams, shading, wireframe, glow, outline, rainbow = false;false;
+int sliderValue = 1, level = 0; sliderValue = 1, level = 0;
+void *instanceBtn; *instanceBtn;
 
-// Function pointer splitted because we want to avoid crash when the il2cpp lib isn't loaded.
-// If you putted getAbsoluteAddress here, the lib tries to read the address without il2cpp loaded,
-// will result in a null pointer which will cause crash
-// See https://guidedhacking.com/threads/android-function-pointers-hooking-template-tutorial.14771/
-void (*AddMoneyExample)(void *instance, int amount);
+// Указатель на функцию разделен, потому что мы хотим избежать сбоя, если библиотека il2cpp не загружена.
+// Если вы укажете getAbsoluteAddress здесь, библиотека попытается прочитать адрес без загруженного il2cpp.
+// приведет к созданию нулевого указателя, что вызовет сбой
+// См. https://guidedhacking.com/threads/android-function-pointers-hooking-template-tutorial.14771/
+void (*AddMoneyExample)(void *instance, int amount); (*AddMoneyExample)(void *instance, int amount);
 
-// we will run our patches in a new thread so our while loop doesn't block process main thread
-// Don't forget to remove or comment out logs before you compile it.
+// Мы будем запускать наши патчи в новом потоке, чтобы наш цикл while не блокировал основной поток процесса.
+// Не забудьте удалить или закомментировать строки логов перед компиляцией.
 
-//KittyMemory Android Example: https://github.com/MJx0/KittyMemory/blob/master/Android/test/src/main.cpp
-//Use ARM Converter to convert ARM to HEX: https://armconverter.com/
-//Note: We use OBFUSCATE_KEY for offsets which is the important part xD
+//Пример использования KittyMemory в Android: https://github.com/MJx0/KittyMemory/blob/master/Android/test/src/main.cpp
+//Используйте ARM Converter для преобразования ARM в HEX: https://armconverter.com/
+//Примечание: Для смещений мы используем OBFUSCATE_KEY, это важная часть xD
 
 /*bool Ismod = false;
 
-bool (*old_mod)(void *instance);
+/*bool Ismod = false;
 bool mod(void *instance) {
     if (instance != NULL && Ismod) {
           return false;
@@ -56,44 +56,40 @@ bool mod(void *instance) {
     return old_mod(instance);
 }*/
 
-// Hooking example. Please refer to online tutorials how to hook
-bool (*old_get_BoolExample)(void *instance);
-bool get_BoolExample(void *instance) {
-    if (instance != NULL && featureHookToggle) {
-        return true;
+// Пример использования хуков. Пожалуйста, обратитесь к онлайн-урокам по настройке хуков.
+bool (*old_get_BoolExample)(void *instance); (*old_get_BoolExample)(void *instance);
+ get_BoolExample(void *instance) { get_BoolExample(void *instance) {
+    if (instance != NULL && featureHookToggle) {if (instance != NULL && featureHookToggle) {
+        вернуть true;return true;
+    }}
+    return old_get_BoolExample(instance);return old_get_BoolExample(instance);
+}
+
+float (*old_get_FloatExample)(void *instance); (*old_get_FloatExample)(void *instance);
+float get_FloatExample(void *instance) { get_FloatExample(void *instance) {
+    if (instance != NULL && sliderValue > 1) {if (instance != NULL && sliderValue > 1) {
+        return (float) sliderValue;return (float) sliderValue;
+    }}
+    return old_get_FloatExample(instance);return old_get_FloatExample(instance);
+}
+
+int (*old_Level)(void *instance); (*old_Level)(void *instance);
+int Level(void *instance) { Level(void *instance) {
+    if (instance != NULL && level) { if  ( instance != NULL && level )  {
+         
     }
-    return old_get_BoolExample(instance);
+     
+}
+	instanceBtn = instance;
 }
 
-float (*old_get_FloatExample)(void *instance);
-float get_FloatExample(void *instance) {
-    if (instance != NULL && sliderValue > 1) {
-        return (float) sliderValue;
-    }
-    return old_get_FloatExample(instance);
-}
-
-int (*old_Level)(void *instance);
-int Level(void *instance) {
-    if (instance != NULL && level) {
-        return (int) level;
-    }
-    return old_Level(instance);
-}
-
-void (*old_Update)(void *instance);
-void Update(void *instance) {
-    instanceBtn = instance;
-    old_Update(instance);
-}
-
-void *hack_thread(void *) {
+void 
     ProcMap il2cppMap;
-    do {
-        il2cppMap = KittyMemory::getLibraryMap(targetLibName);
-        sleep(1);
-    } while (!il2cppMap.isValid() && mlovinit());
-    setShader("_MainTex");
+    делать  {
+        il2cppMap = KittyMemory:: getLibraryMap ( targetLibName ) ;
+        )
+      
+    )
     LogShaders();
     Wallhack();
     
@@ -235,7 +231,6 @@ hexPatches.Get_MaxSpeedAbilities = MemoryPatch::createWithHex(targetLibName, //N
 													
 							
     LOGI(OBFUSCATE("Done"));
-#endif
 
     return NULL;
 }
