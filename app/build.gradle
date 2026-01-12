@@ -1,0 +1,56 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdk 33
+    namespace "uk.lgl"
+
+    defaultConfig {
+        applicationId "uk.lgl"
+        minSdk 21
+        targetSdk 33
+        versionCode 33
+        versionName "2.9"
+        ndk {
+            abiFilters 'armeabi-v7a'
+        }
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("HunMod.keystore")
+            storePassword "HunMod"
+            keyAlias "HunMod"
+            keyPassword "HunMod"
+        }
+    }
+
+    buildTypes {
+        release {
+            shrinkResources false
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release  // Подключение подписи для релизной сборки
+        }
+        debug {
+            shrinkResources false
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // Путь к Android.mk
+    externalNativeBuild {
+        ndkBuild {
+            path file('src/main/jni/Android.mk')
+        }
+    }
+
+    // Указываем версию NDK
+    //ndkVersion '24.0.8215888'
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
