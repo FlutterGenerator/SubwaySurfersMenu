@@ -1,6 +1,8 @@
 # SubwaySurfersMenu
 [![SubwaySurfersMenu Build](https://github.com/FlutterGenerator/SubwaySurfersMenu/actions/workflows/build-apk.yml/badge.svg)](https://github.com/FlutterGenerator/SubwaySurfersMenu/actions/workflows/build-apk.yml)
 
+[![License Info](https://img.shields.io/badge/License-GPL--3.0-blue.svg?style=flat-square)](https://github.com/FlutterGenerator/SubwaySurfersMenu/blob/master/LICENSE)
+
 # Subway Surfers Version: (88056) – 3.57.0
 **Google Play Release Date:** 19 December 2025
 
