@@ -16,6 +16,7 @@ LOCAL_CPPFLAGS += -Wno-error=c++11-narrowing -fms-extensions -fno-rtti -fno-exce
 
 # Флаги линковки
 LOCAL_LDFLAGS += -Wl,--gc-sections,--strip-all, -llog
+LOCAL_LDFLAGS += "-Wl,-z,max-page-size=16384"
 
 # Используем ARM архитектуру (в случае 32-битной сборки)
 LOCAL_ARM_MODE := arm
